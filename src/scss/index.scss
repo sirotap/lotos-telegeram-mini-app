@@ -1,6 +1,7 @@
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
+@import url("./_loading.scss");
 
 * {
     box-sizing: border-box;
@@ -20,7 +21,4 @@ html {
 body {
     font-family: "Poppins", sans-serif;
     overflow-x: hidden;
-}
-.navbar img:first-child {
-    margin-left: 0;
 }
