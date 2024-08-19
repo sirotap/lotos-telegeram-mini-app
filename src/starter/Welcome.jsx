@@ -21,7 +21,7 @@ const Welcome = () => (
 const AllYourFavorites = () => (
     <>
         <div>
-            <img src={illustration2} alt="illustration" />
+            <img src={illustration2} alt="illustration"className="h-56 w-48" loading="lazy" />
         </div>
         <div className="h-32">
             <h3 className="text-2xl font-semibold">All your favorites</h3>
@@ -33,7 +33,7 @@ const AllYourFavorites = () => (
 const FreeDeliveryOffers = () => (
     <>
         <div>
-            <img src={illustration3} alt="illustration" />
+            <img src={illustration3} alt="illustration" className="h-56 w-48" loading="lazy"/>
         </div>
         <div className="h-32">
             <h3 className="text-2xl font-semibold">Free delivery offers</h3>
@@ -45,7 +45,7 @@ const FreeDeliveryOffers = () => (
 const ChooseYourFood = () => (
     <>
         <div>
-            <img src={illustration4} alt="illustration" />
+            <img src={illustration4} alt="illustration" className="h-56 w-48" loading="lazy"/>
         </div>
         <div className="h-32">
             <h3 className="text-2xl font-semibold">Choose your food</h3>
@@ -67,7 +67,7 @@ const Start = () => {
     };
 
     return (
-        <div className="flex flex-col items-center text-center pt-10 justify-around h-[100dvh] px-5">
+        <div className="flex flex-col items-center text-center pt-10 justify-around h-[100svh] px-5">
             <img src={circleImg} alt="circle" className="absolute -z-10 top-0 left-0" />
             <div className="flex items-center gap-x-2">
                 <img src={logo} alt="img" className="w-14" />
