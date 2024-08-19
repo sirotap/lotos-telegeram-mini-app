@@ -42,7 +42,7 @@ const FreeDeliveryOffers = () => (
     </>
 );
 
-const ChooseYourFood = () => (
+const ChooseYourFood = () => ( 
     <>
         <div>
             <img src={illustration4} alt="illustration" className="h-56 w-48" loading="lazy"/>

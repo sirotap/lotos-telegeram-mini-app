@@ -13,18 +13,15 @@ export default function App() {
     useEffect(() => {
         Aos.init({ duration: 800 });
 
-        // Request animation frame for better timing control
-        const handleLoad = () => {
-            requestAnimationFrame(() => {
-                setLoadingClass('loading-anima slide-up'); // Trigger animation
-                setTimeout(() => setIsLoading(false), 500); // Wait for animation to finish
-            });
-        };
+        // Simulate loading time
+        const timer = setTimeout(() => {
+            setLoadingClass('loading-anima slide-up'); // Trigger animation
+            setTimeout(() => setIsLoading(false), 500); // Wait for animation to finish
+        }, 1000);
 
-        window.addEventListener('load', handleLoad);
-
-        return () => window.removeEventListener('load', handleLoad);
+        return () => clearTimeout(timer);
     }, []);
+
 
     const routes = useRoutes([
         { path: '/', element: <Start /> },
