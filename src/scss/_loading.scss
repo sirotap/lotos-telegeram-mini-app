@@ -8,12 +8,11 @@ $fontColor: #fff;
     display: flex;
     justify-content: center;
     align-items: center;
-    position: fixed;
+    position: fixed; // Fixed position to cover the entire viewport
     top: 0;
     left: 0;
-    animation: none; // Avval animatsiya yo'q
+    animation: none; // Default, no animation applied
 }
-
 .slide-up {
     animation: slide-up 0.8s ease-out forwards; // Sahifa yuklangandan keyin animatsiyani qo'llash
 }

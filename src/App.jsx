@@ -13,12 +13,17 @@ export default function App() {
     useEffect(() => {
         Aos.init({ duration: 800 });
 
-        // Sahifa to'liq yuklanganini kutish
-        window.addEventListener('load', () => {
-            setLoadingClass('loading-anima slide-up'); // Animatsiyani boshlash
-            setTimeout(() => setIsLoading(false), 500); // Animatsiya tugagach, yuklanishni to'xtatish
-        });
+        // Request animation frame for better timing control
+        const handleLoad = () => {
+            requestAnimationFrame(() => {
+                setLoadingClass('loading-anima slide-up'); // Trigger animation
+                setTimeout(() => setIsLoading(false), 500); // Wait for animation to finish
+            });
+        };
 
+        window.addEventListener('load', handleLoad);
+
+        return () => window.removeEventListener('load', handleLoad);
     }, []);
 
     const routes = useRoutes([
