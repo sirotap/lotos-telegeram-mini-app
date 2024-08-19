@@ -9,7 +9,7 @@ import { useState } from "react";
 const Welcome = () => (
     <>
         <div>
-            <img src={illustration1} alt="illustration" />
+            <img src={illustration1} alt="illustration" className="h-56 w-48" loading="lazy"/>
         </div>
         <div className="h-32">
             <h3 className="text-2xl font-semibold">Welcome</h3>
