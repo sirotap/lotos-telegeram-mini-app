@@ -3,7 +3,7 @@ import Card from "./Card";
 
 const Home = () => {
   return (
-    <div >
+    <div className="bg-white">
       <label className="max-w-[350px] mb-4 mt-8 relative bg-white min-w-sm mx-auto flex flex-row items-center justify-center border py-1 px-2 rounded-2xl gap-2 shadow-2xl focus-within:border-gray-300" htmlFor="search-bar">
         <input id="search-bar" placeholder="Search" className="px-6 py-2 w-full rounded-md flex-1 outline-none bg-white" />
         <button className="w-auto px-6 py-3 bg-primary-50 border-primary-50 text-white fill-white active:scale-95 duration-100 border will-change-transform overflow-hidden relative rounded-xl transition-all disabled:opacity-70">
