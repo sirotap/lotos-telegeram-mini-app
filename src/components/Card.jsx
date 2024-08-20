@@ -8,7 +8,7 @@ const Card = () => {
             <div className="px-2 mt-3">
                 <h3 className="text-2xl font-semibold">23.000 so'm</h3>
                 <h4 className="text-xl">Palov</h4>
-                <p className="text-gray-400">300g</p>
+                <p className="text-gray-400 mt-3">300g</p>
             </div>
             <button className="m-2 w-full py-3 bg-gray-200 rounded-xl">+ Qo'shish</button>
         </div>
