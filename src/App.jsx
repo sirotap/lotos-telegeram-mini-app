@@ -1,10 +1,9 @@
 import { useState, useEffect } from 'react';
-import { useRoutes } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import Aos from 'aos';
 import 'aos/dist/aos.css';
-import Start from './starter/Welcome';
-import LoadingPage from './components/Loading';
+import LoadingPage from '@/components/Loading';
+import AppRoutes from '@/routes/Routes';
 
 export default function App() {
     const [isLoading, setIsLoading] = useState(true);
@@ -22,12 +21,6 @@ export default function App() {
         return () => clearTimeout(timer);
     }, []);
 
-
-    const routes = useRoutes([
-        { path: '/', element: <Start /> },
-        { path: '/welcome/*', element: <Start /> },
-    ]);
-
     if (isLoading) {
         return <div className={loadingClass}><LoadingPage /></div>;
     }
@@ -35,7 +28,7 @@ export default function App() {
     return (
         <>
             <Toaster position="top-right" reverseOrder={false} />
-            {routes}
+            <AppRoutes />
         </>
     );
 }

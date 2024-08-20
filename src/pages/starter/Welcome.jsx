@@ -1,11 +1,12 @@
 import { Routes, Route, useNavigate } from "react-router-dom";
-import illustration1 from "../assets/Illustration_1.png";
-import illustration2 from "../assets/Illustration_2.png";
-import illustration3 from "../assets/Illustrations_3.png";
-import illustration4 from "../assets/Illustrations_4.png";
-import logo from '../assets/g14.png';
-import circleImg from '../assets/circle_background.png';
 import { useState } from "react";
+import illustration1 from "@/assets/Illustration_1.png";
+import illustration2 from "@/assets/Illustration_2.png";
+import illustration3 from "@/assets/Illustrations_3.png";
+import illustration4 from "@/assets/Illustrations_4.png";
+import logo from '@/assets/g14.png';
+import circleImg from '@/assets/circle_background.png';
+import Loading from "@/components/Loading"
 const Welcome = () => (
     <>
         <div>
@@ -21,7 +22,7 @@ const Welcome = () => (
 const AllYourFavorites = () => (
     <>
         <div>
-            <img src={illustration2} alt="illustration"className="h-56 w-48" loading="lazy" />
+            <img src={illustration2} alt="illustration"className="h-56 w-56" loading="lazy" />
         </div>
         <div className="h-32">
             <h3 className="text-2xl font-semibold">All your favorites</h3>
@@ -33,7 +34,7 @@ const AllYourFavorites = () => (
 const FreeDeliveryOffers = () => (
     <>
         <div>
-            <img src={illustration3} alt="illustration" className="h-56 w-48" loading="lazy"/>
+            <img src={illustration3} alt="illustration" className="h-56 w-56" loading="lazy"/>
         </div>
         <div className="h-32">
             <h3 className="text-2xl font-semibold">Free delivery offers</h3>
@@ -57,12 +58,20 @@ const ChooseYourFood = () => (
 const Start = () => {
     const navigate = useNavigate();
     const [step, setStep] = useState(0);
+    const [isLoading, setIsLoading] = useState(false);
 
     const handleNext = () => {
-        const nextStep = step + 1;
-        if (nextStep <= 3) {
-            setStep(nextStep);
-            navigate(`/welcome/${nextStep}`);
+        if (step === 3) {
+            setIsLoading(true);
+            setTimeout(() => {
+                navigate('/dashboard');
+            }, 2000); // 2 sekunddan keyin `/dashboard` sahifasiga o'tadi
+        } else {
+            const nextStep = step + 1;
+            if (nextStep <= 3) {
+                setStep(nextStep);
+                navigate(`/welcome/${nextStep}`);
+            }
         }
     };
 
@@ -80,12 +89,16 @@ const Start = () => {
                 <Route path="/" element={<Welcome />} />
             </Routes>
             <footer className="w-full">
-                <button 
-                    onClick={handleNext} 
-                    className="bg-primary-50 text-white text-base w-full py-3 rounded-md"
-                >
-                    Next
-                </button>
+                {isLoading ? (
+                    <Loading /> // O'tish vaqtida Loading komponenti ko'rinadi
+                ) : (
+                    <button 
+                        onClick={handleNext} 
+                        className="bg-primary-50 text-white text-base w-full py-3 rounded-md"
+                    >
+                        {step === 3 ? "Menyuni ko'rish" : "Next"}
+                    </button>
+                )}
             </footer>
         </div>
     );
