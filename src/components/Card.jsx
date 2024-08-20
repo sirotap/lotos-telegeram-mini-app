@@ -30,11 +30,12 @@ const Card = ({ item, onAddClick }) => {
     };
 
     return (
-        <div className="rounded-2xl w-full max-w-[350px] mx-auto bg-slate-50 flex flex-col pb-3">
+        <div className="rounded-2xl w-full max-w-[350px] mx-auto bg-slate-50 flex flex-col pb-4">
             <img
                 src={`http://localhost:5000/api/Files?id=${item.image}`} // Adjust the image path accordingly
                 alt={item.name}
                 className="rounded-2xl w-full h-auto max-h-[200px]"
+                loading='lazy'
             />
             <div className="mt-3 max-w-[90%] mx-auto w-full">
                 <h3 className="text-2xl font-semibold">{item.price.toLocaleString()} so'm</h3>
