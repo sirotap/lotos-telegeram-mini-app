@@ -1,5 +1,5 @@
 import Card from "./Card";
-import { CiSearch } from "react-icons/ci";
+
 
 const Home = () => {
   return (
@@ -28,7 +28,7 @@ const Home = () => {
 
         </button>
       </label>
-      <div className="grid grid-cols-2 gap-4 px-5">
+      <div className="grid grid-cols-1 gap-4 px-5">
         <Card />
         <Card />
         <Card />
