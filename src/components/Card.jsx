@@ -3,7 +3,7 @@ import ads from "../assets/ads.jpg";
 
 const Card = () => {
     return (
-        <div className="rounded-2xl max-w-[350px] mx-auto bg-slate-50 flex flex-col pb-3">
+        <div className="rounded-2xl w-full max-w-[350px] mx-auto bg-slate-50 flex flex-col pb-3">
             <img src={ads} alt="palov" className="rounded-2xl w-full  h-auto max-h-[200px]" />
             <div className="px-2 mt-3">
                 <h3 className="text-2xl font-semibold">23.000 so'm</h3>
