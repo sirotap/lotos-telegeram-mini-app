@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+/* eslint-disable react/no-unescaped-entities */
+import  { useState } from 'react';
 import ads from "../assets/ads.jpg";
 import toast from 'react-hot-toast';
 
@@ -38,7 +39,7 @@ const Card = () => {
                 {isAdding ? (
                     <button
                         onClick={handleAddClick}
-                        className="mx-auto w-full py-3 bg-gray-200 rounded-xl max-w-sm mt-3 text-base"
+                        className="mx-auto w-full py-3 bg-primary-50 text-white shadow-md rounded-xl max-w-sm mt-3 text-base"
                     >
                         + Qo'shish
                     </button>
