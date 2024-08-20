@@ -76,7 +76,7 @@ const Start = () => {
     };
 
     return (
-        <div className="flex flex-col items-center text-center pt-10 justify-around h-[100svh] px-5">
+        <div className="flex flex-col items-center text-center pt-10 justify-around h-[100svh] px-5 bg-white">
             <img src={circleImg} alt="circle" className="absolute -z-10 top-0 left-0" />
             <div className="flex items-center gap-x-2">
                 <img src={logo} alt="img" className="w-14" />
