@@ -14,7 +14,6 @@ const Dashboard = () => {
                 <Route path="orders" element={<Orders />} />
                 <Route path="" element={<Home />} />
             </Routes>
-            <NavbarBottom />
         </main>
     )
 }

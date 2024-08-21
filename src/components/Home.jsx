@@ -1,13 +1,14 @@
-// Home component
 import { useState, useEffect } from 'react';
 import Card from './Card';
 import Drawer from './Drawer';
 import { CiShoppingBasket } from "react-icons/ci";
 import CardOrder from './CardOrder';
+
 const Home = () => {
     const [menuItems, setMenuItems] = useState([]);
     const [orders, setOrders] = useState({});
     const [isOpen, setIsOpen] = useState(false);
+    const [searchTerm, setSearchTerm] = useState('');
 
     useEffect(() => {
         const fetchMenuItems = async () => {
@@ -37,18 +38,35 @@ const Home = () => {
             setOrders(({ [itemId]: _, ...rest }) => rest);
         }
     };
+
     const handleViewOrders = () => {
         setIsOpen(true);
     };
+
     const handleUpdateOrder = (itemId, newQuantity) => {
         setOrders({ ...orders, [itemId]: newQuantity });
     };
+
+    const handleSearch = (event) => {
+        setSearchTerm(event.target.value);
+    };
+
     const totalOrderCount = Object.values(orders).reduce((sum, quantity) => sum + quantity, 0);
 
+    const filteredMenuItems = menuItems.filter(item =>
+        item.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
     return (
-        <div className="bg-white">
+        <div className="bg-white min-h-[70svh]">
             <label className="max-w-[350px] mb-4 mt-8 relative bg-white min-w-sm mx-auto flex flex-row items-center justify-center border py-1 px-2 rounded-2xl gap-2 shadow-2xl focus-within:border-gray-300" htmlFor="search-bar">
-                <input id="search-bar" placeholder="Search" className="px-6 py-2 w-full rounded-md flex-1 outline-none bg-white" />
+                <input 
+                    id="search-bar" 
+                    placeholder="Search" 
+                    className="px-6 py-2 w-full rounded-md flex-1 outline-none bg-white" 
+                    value={searchTerm}
+                    onChange={handleSearch}
+                />
                 <button className="w-auto px-6 py-3 bg-primary-50 border-primary-50 text-white fill-white active:scale-95 duration-100 border will-change-transform overflow-hidden relative rounded-xl transition-all disabled:opacity-70">
                     <div className="relative">
                         <div className="flex items-center justify-center h-3 w-3 absolute inset-1/2 -translate-x-1/2 -translate-y-1/2 transition-all">
@@ -64,7 +82,7 @@ const Home = () => {
                 </button>
             </label>
             <div className="grid grid-cols-1 gap-4 px-5">
-                {menuItems.map((item) => (
+                {filteredMenuItems.map((item) => (
                     <Card
                         key={item.id}
                         item={item}
@@ -78,36 +96,32 @@ const Home = () => {
             {totalOrderCount > 0 && (
                 <button
                     onClick={handleViewOrders}
-                    className="fixed bottom-20 right-4 bg-primary-50 text-blacck px-4 py-2 rounded-full shadow-lg flex items-center"
+                    className="fixed bottom-0 w-full bg-primary-50 text-blacck px-4 py-2 shadow-lg flex items-center text-white"
                 >
-                    <CiShoppingBasket className='text-3xl text-white' />({totalOrderCount})
+                    <CiShoppingBasket className='text-3xl' /> Buyurtmaga o&apos;tish({totalOrderCount})
                 </button>
             )}
             <Drawer isOpen={isOpen} setIsOpen={setIsOpen}>
-                <Drawer isOpen={isOpen} setIsOpen={setIsOpen}>
-                    <div className='flex items-center bg-primary-50 text-white px-3 justify-between py-3'>
-                        <h2 className="text-2xl font-bold ">Buyurtmalar</h2>
-                        <button onClick={() => setIsOpen(false)}>
-                            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                            </svg>
-                        </button>
-                    </div>
+                <div className='flex items-center bg-primary-50 text-white px-3 justify-between py-3'>
+                    <h2 className="text-2xl font-bold ">Buyurtmalar</h2>
+                    <button onClick={() => setIsOpen(false)}>
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
 
-                    {menuItems.map((item) => (
-                        <CardOrder
-                            key={item.id}
-                            item={item}
-                            quantity={orders[item.id] || 0}
-                            onUpdateOrder={handleUpdateOrder}
-                        />
-                    ))}
-                </Drawer>
-
+                {menuItems.map((item) => (
+                    <CardOrder
+                        key={item.id}
+                        item={item}
+                        quantity={orders[item.id] || 0}
+                        onUpdateOrder={handleUpdateOrder}
+                    />
+                ))}
             </Drawer>
         </div>
     );
 };
 
 export default Home;
-
