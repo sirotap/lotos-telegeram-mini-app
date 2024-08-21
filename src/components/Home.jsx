@@ -1,7 +1,8 @@
+/* eslint-disable no-unused-vars */
 import { useState, useEffect } from 'react';
 import Card from './Card';
 import Drawer from './Drawer';
-import { CiShoppingBasket } from "react-icons/ci";
+import { CiShoppingBasket, CiRead } from "react-icons/ci";
 import CardOrder from './CardOrder';
 
 const Home = () => {
@@ -56,14 +57,54 @@ const Home = () => {
     const filteredMenuItems = menuItems.filter(item =>
         item.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
+    const calculateTotalPrice = () => {
+        return menuItems.reduce((total, item) => {
+            const quantity = orders[item.id] || 0;
+            return total + (item.price * quantity);
+        }, 0);
+    };
+    const handleConfirmOrder = async () => {
+        const isConfirmed = window.confirm("Buyurtmani tasdiqlaysizmi?");
+        if (isConfirmed) {
+            const orderData = {
+                orderId: Math.floor(Math.random() * 100000),
+                comment: "izoh",
+                storeItems: Object.entries(orders).map(([menuItemId, quantity]) => ({
+                    menuItemId: parseInt(menuItemId),
+                    quantity
+                }))
+            };
+
+            try {
+                const response = await fetch('http://localhost:5000/api/Orders/NewOrder', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(orderData),
+                });
+
+                if (response.ok) {
+                    alert("Buyurtma muvaffaqiyatli yuborildi!");
+                    setOrders({});
+                    setIsOpen(false);
+                } else {
+                    alert("Buyurtma yuborishda xatolik yuz berdi.");
+                }
+            } catch (error) {
+                console.error('Error sending order:', error);
+                alert("Buyurtma yuborishda xatolik yuz berdi.");
+            }
+        }
+    };
 
     return (
         <div className="bg-white min-h-[70svh]">
             <label className="max-w-[350px] mb-4 mt-8 relative bg-white min-w-sm mx-auto flex flex-row items-center justify-center border py-1 px-2 rounded-2xl gap-2 shadow-2xl focus-within:border-gray-300" htmlFor="search-bar">
-                <input 
-                    id="search-bar" 
-                    placeholder="Search" 
-                    className="px-6 py-2 w-full rounded-md flex-1 outline-none bg-white" 
+                <input
+                    id="search-bar"
+                    placeholder="Search"
+                    className="px-6 py-2 w-full rounded-md flex-1 outline-none bg-white"
                     value={searchTerm}
                     onChange={handleSearch}
                 />
@@ -98,7 +139,7 @@ const Home = () => {
                     onClick={handleViewOrders}
                     className="fixed bottom-0 w-full bg-primary-50 text-blacck px-4 py-2 shadow-lg flex items-center text-white"
                 >
-                    <CiShoppingBasket className='text-3xl' /> Buyurtmaga o&apos;tish({totalOrderCount})
+                    <CiRead className='text-2xl' /> Buyurtmaga o&apos;tish({totalOrderCount})
                 </button>
             )}
             <Drawer isOpen={isOpen} setIsOpen={setIsOpen}>
@@ -119,6 +160,18 @@ const Home = () => {
                         onUpdateOrder={handleUpdateOrder}
                     />
                 ))}
+                {totalOrderCount > 0 && (
+                    <button
+                        onClick={handleConfirmOrder}
+                        className="fixed bottom-0 w-full bg-primary-50 text-white px-4 py-2 shadow-lg flex items-center justify-between"
+                    >
+                        <div className="flex items-center">
+                            <CiShoppingBasket className='text-2xl mr-2' />
+                            <span>Tasdiqlash</span>
+                        </div>
+                        <span className="font-bold">{calculateTotalPrice().toLocaleString()} so'm</span>
+                    </button>
+                )}
             </Drawer>
         </div>
     );
