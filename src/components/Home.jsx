@@ -1,20 +1,38 @@
-import React, { useState, useEffect } from 'react';
+// Home component
+import { useState, useEffect } from 'react';
 import Card from './Card';
 
 const Home = () => {
     const [menuItems, setMenuItems] = useState([]);
+    const [orders, setOrders] = useState({});
 
     useEffect(() => {
-        fetch('http://localhost:5000/api/MenuItems')
-            .then(response => response.json())
-            .then(data => setMenuItems(data))
-            .catch(error => console.error('Error fetching menu items:', error));
+        const fetchMenuItems = async () => {
+            try {
+                const response = await fetch('http://localhost:5000/api/MenuItems');
+                const data = await response.json();
+                setMenuItems(data);
+            } catch (error) {
+                console.error('Error fetching menu items:', error);
+            }
+        };
+        fetchMenuItems();
     }, []);
-    console.log(menuItems)
 
     const handleAddClick = (itemId) => {
-        console.log('Add clicked for item:', itemId);
-        // Add your functionality here (e.g., updating state, adding to cart)
+        setOrders({ ...orders, [itemId]: (orders[itemId] || 0) + 1 });
+    };
+
+    const handleIncrement = (itemId) => {
+        setOrders({ ...orders, [itemId]: orders[itemId] + 1 });
+    };
+
+    const handleDecrement = (itemId) => {
+        if (orders[itemId] > 1) {
+            setOrders({ ...orders, [itemId]: orders[itemId] - 1 });
+        } else {
+            setOrders(({ [itemId]: _, ...rest }) => rest);
+        }
     };
 
     return (
@@ -36,12 +54,25 @@ const Home = () => {
                 </button>
             </label>
             <div className="grid grid-cols-1 gap-4 px-5">
-                {menuItems.map(item => (
+                {menuItems.map((item) => (
                     <Card
                         key={item.id}
                         item={item}
                         onAddClick={() => handleAddClick(item.id)}
+                        onIncrement={() => handleIncrement(item.id)}
+                        onDecrement={() => handleDecrement(item.id)}
+                        quantity={orders[item.id] || 0}
                     />
+                ))}
+            </div>
+            <div>
+                <h2>Orders</h2>
+                {Object.entries(orders).map(([itemId, quantity]) => (
+                    <div key={itemId}>
+                        <p>
+                            {menuItems.find((item) => item.id === parseInt(itemId)).name}: {quantity}
+                        </p>
+                    </div>
                 ))}
             </div>
         </div>
@@ -49,3 +80,7 @@ const Home = () => {
 };
 
 export default Home;
+
+// Card component
+/* eslint-disable react/prop-types */
+/* eslint-disable react/no-unescaped-entities */
