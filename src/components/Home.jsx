@@ -4,6 +4,7 @@ import Card from './Card';
 import Drawer from './Drawer';
 import { CiShoppingBasket, CiRead } from "react-icons/ci";
 import CardOrder from './CardOrder';
+import toast from 'react-hot-toast';
 
 const Home = () => {
     const [menuItems, setMenuItems] = useState([]);
@@ -85,15 +86,15 @@ const Home = () => {
                 });
 
                 if (response.ok) {
-                    alert("Buyurtma muvaffaqiyatli yuborildi!");
+                    toast.success("Buyurtma muvaffaqiyatli yuborildi!");
                     setOrders({});
                     setIsOpen(false);
                 } else {
-                    alert("Buyurtma yuborishda xatolik yuz berdi.");
+                    toast.error("Buyurtma yuborishda xatolik yuz berdi.");
                 }
             } catch (error) {
                 console.error('Error sending order:', error);
-                alert("Buyurtma yuborishda xatolik yuz berdi.");
+                toast.error("Buyurtma yuborishda xatolik yuz berdi.");
             }
         }
     };
@@ -169,7 +170,7 @@ const Home = () => {
                             <CiShoppingBasket className='text-2xl mr-2' />
                             <span>Tasdiqlash</span>
                         </div>
-                        <span className="font-bold">{calculateTotalPrice().toLocaleString()} so'm</span>
+                        <span className="font-bold">{calculateTotalPrice().toLocaleString()} so&apos;m</span>
                     </button>
                 )}
             </Drawer>
