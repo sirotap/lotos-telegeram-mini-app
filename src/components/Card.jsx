@@ -44,7 +44,7 @@ const Card = ({ item, onAddClick, onIncrement, onDecrement, quantity }) => {
                 <h3 className="text-2xl font-semibold">{item.price.toLocaleString()} so'm</h3>
                 <h4 className="text-xl">{item.name}</h4>
                 <p className="text-gray-400 mt-3">{item.description}</p>
-                {isAdding ? (
+                {isAdding || quantity ==0 ? (
                     <button
                         onClick={handleAddClick}
                         className="mx-auto w-full py-3 bg-primary-50 text-white shadow-md rounded-xl max-w-sm mt-3 text-base"
