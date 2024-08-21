@@ -100,7 +100,7 @@ const Home = () => {
     };
 
     return (
-        <div className="bg-white min-h-[70svh]">
+        <div className="bg-white min-h-[70svh] h-full">
             <label className="max-w-[350px] mb-4 mt-8 relative bg-white min-w-sm mx-auto flex flex-row items-center justify-center border py-1 px-2 rounded-2xl gap-2 shadow-2xl focus-within:border-gray-300" htmlFor="search-bar">
                 <input
                     id="search-bar"
