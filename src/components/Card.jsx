@@ -1,9 +1,14 @@
 /* eslint-disable react/prop-types */
+/* eslint-disable react/no-unescaped-entities */
 import { useState } from 'react';
 import toast from 'react-hot-toast';
 
 const Card = ({ item, onAddClick, onIncrement, onDecrement, quantity }) => {
     const [isAdding, setIsAdding] = useState(quantity === 0);
+
+    if (!item || !item.image) {
+        return null; // Return null if the item prop is undefined or doesn't have an image property
+    }
 
     const handleAddClick = () => {
         setIsAdding(false);
@@ -36,7 +41,7 @@ const Card = ({ item, onAddClick, onIncrement, onDecrement, quantity }) => {
                 loading="lazy"
             />
             <div className="mt-3 max-w-[90%] mx-auto w-full">
-                <h3 className="text-2xl font-semibold">{item.price.toLocaleString()} so&apos;m</h3>
+                <h3 className="text-2xl font-semibold">{item.price.toLocaleString()} so'm</h3>
                 <h4 className="text-xl">{item.name}</h4>
                 <p className="text-gray-400 mt-3">{item.description}</p>
                 {isAdding ? (
@@ -44,7 +49,7 @@ const Card = ({ item, onAddClick, onIncrement, onDecrement, quantity }) => {
                         onClick={handleAddClick}
                         className="mx-auto w-full py-3 bg-primary-50 text-white shadow-md rounded-xl max-w-sm mt-3 text-base"
                     >
-                        + Qo&apos;shish
+                        + Qo'shish
                     </button>
                 ) : (
                     <div className="flex items-center justify-between mx-auto w-full bg-gray-200 rounded-xl max-w-sm mt-3 text-base">

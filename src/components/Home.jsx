@@ -1,10 +1,13 @@
 // Home component
 import { useState, useEffect } from 'react';
 import Card from './Card';
-
+import Drawer from './Drawer';
+import { CiShoppingBasket } from "react-icons/ci";
+import CardOrder from './CardOrder';
 const Home = () => {
     const [menuItems, setMenuItems] = useState([]);
     const [orders, setOrders] = useState({});
+    const [isOpen, setIsOpen] = useState(false);
 
     useEffect(() => {
         const fetchMenuItems = async () => {
@@ -34,6 +37,13 @@ const Home = () => {
             setOrders(({ [itemId]: _, ...rest }) => rest);
         }
     };
+    const handleViewOrders = () => {
+        setIsOpen(true);
+    };
+    const handleUpdateOrder = (itemId, newQuantity) => {
+        setOrders({ ...orders, [itemId]: newQuantity });
+    };
+    const totalOrderCount = Object.values(orders).reduce((sum, quantity) => sum + quantity, 0);
 
     return (
         <div className="bg-white">
@@ -65,22 +75,39 @@ const Home = () => {
                     />
                 ))}
             </div>
-            <div>
-                <h2>Orders</h2>
-                {Object.entries(orders).map(([itemId, quantity]) => (
-                    <div key={itemId}>
-                        <p>
-                            {menuItems.find((item) => item.id === parseInt(itemId)).name}: {quantity}
-                        </p>
+            {totalOrderCount > 0 && (
+                <button
+                    onClick={handleViewOrders}
+                    className="fixed bottom-20 right-4 bg-primary-50 text-blacck px-4 py-2 rounded-full shadow-lg flex items-center"
+                >
+                    <CiShoppingBasket className='text-3xl text-white' />({totalOrderCount})
+                </button>
+            )}
+            <Drawer isOpen={isOpen} setIsOpen={setIsOpen}>
+                <Drawer isOpen={isOpen} setIsOpen={setIsOpen}>
+                    <div className='flex items-center bg-primary-50 text-white px-3 justify-between py-3'>
+                        <h2 className="text-2xl font-bold ">Buyurtmalar</h2>
+                        <button onClick={() => setIsOpen(false)}>
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
                     </div>
-                ))}
-            </div>
+
+                    {menuItems.map((item) => (
+                        <CardOrder
+                            key={item.id}
+                            item={item}
+                            quantity={orders[item.id] || 0}
+                            onUpdateOrder={handleUpdateOrder}
+                        />
+                    ))}
+                </Drawer>
+
+            </Drawer>
         </div>
     );
 };
 
 export default Home;
 
-// Card component
-/* eslint-disable react/prop-types */
-/* eslint-disable react/no-unescaped-entities */
