@@ -4,7 +4,7 @@ export default function Drawer({ children, isOpen, setIsOpen }) {
     return (
         <main
             className={
-                " fixed overflow-hidden z-[99999] bg-opacity-25 inset-0 transform ease-in-out max-h-[100svh]" +
+                " fixed overflow-hidden z-[999] bg-opacity-25 inset-0 transform ease-in-out max-h-[100svh]" +
                 (isOpen
                     ? " transition-opacity opacity-100 duration-500 translate-x-0  "
                     : " transition-all delay-500 opacity-0 translate-x-full  ")

@@ -11,7 +11,7 @@ const Home = () => {
     const [orders, setOrders] = useState({});
     const [isOpen, setIsOpen] = useState(false);
     const [searchTerm, setSearchTerm] = useState('');
-
+    const [isModalOpen, setIsModalOpen] = useState(false);
     useEffect(() => {
         const fetchMenuItems = async () => {
             try {
@@ -64,41 +64,41 @@ const Home = () => {
             return total + (item.price * quantity);
         }, 0);
     };
-    const handleConfirmOrder = async () => {
-        const isConfirmed = window.confirm("Buyurtmani tasdiqlaysizmi?");
-        if (isConfirmed) {
-            const orderData = {
-                orderId: Math.floor(Math.random() * 100000),
-                comment: "izoh",
-                storeItems: Object.entries(orders).map(([menuItemId, quantity]) => ({
-                    menuItemId: parseInt(menuItemId),
-                    quantity
-                }))
-            };
-
-            try {
-                const response = await fetch('http://localhost:5000/api/Orders/NewOrder', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(orderData),
-                });
-
-                if (response.ok) {
-                    toast.success("Buyurtma muvaffaqiyatli yuborildi!");
-                    setOrders({});
-                    setIsOpen(false);
-                } else {
-                    toast.error("Buyurtma yuborishda xatolik yuz berdi.");
-                }
-            } catch (error) {
-                console.error('Error sending order:', error);
+    const handleConfirmOrder = () => {
+        setIsModalOpen(true);
+    };
+    const confirmOrder = async () => {
+        const orderData = {
+            orderId: Math.floor(Math.random() * 100000),
+            comment: "izoh",
+            storeItems: Object.entries(orders).map(([menuItemId, quantity]) => ({
+                menuItemId: parseInt(menuItemId),
+                quantity
+            }))
+        };
+    
+        try {
+            const response = await fetch('http://localhost:5000/api/Orders/NewOrder', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(orderData),
+            });
+    
+            if (response.ok) {
+                toast.success("Buyurtma muvaffaqiyatli yuborildi!");
+                setOrders({});
+                setIsOpen(false);
+            } else {
                 toast.error("Buyurtma yuborishda xatolik yuz berdi.");
             }
+        } catch (error) {
+            console.error('Error sending order:', error);
+            toast.error("Buyurtma yuborishda xatolik yuz berdi.");
         }
+        setIsModalOpen(false);
     };
-
     return (
         <div className="bg-white min-h-[70svh] h-full">
             <label className="max-w-[350px] mb-4 mt-8 relative bg-white min-w-sm mx-auto flex flex-row items-center justify-center border py-1 px-2 rounded-2xl gap-2 shadow-2xl focus-within:border-gray-300" htmlFor="search-bar">
@@ -123,7 +123,7 @@ const Home = () => {
                     </div>
                 </button>
             </label>
-            <div className="grid grid-cols-1 gap-4 px-5">
+            <div className="grid grid-cols-1 gap-4 px-5 py-10">
                 {filteredMenuItems.map((item) => (
                     <Card
                         key={item.id}
@@ -138,10 +138,32 @@ const Home = () => {
             {totalOrderCount > 0 && (
                 <button
                     onClick={handleViewOrders}
-                    className="fixed bottom-0 w-full bg-primary-50 text-blacck px-4 py-2 shadow-lg flex items-center text-white"
+                    className="fixed uppercase gap-x-2 bottom-0 w-full bg-primary-50 text-blacck px-4 py-4 shadow-lg flex items-center text-white text-center justify-center"
                 >
                     <CiRead className='text-2xl' /> Buyurtmaga o&apos;tish({totalOrderCount})
                 </button>
+            )}
+            {isModalOpen && (
+                <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-[9999]">
+                    <div className="bg-white p-6 rounded-lg shadow-xl">
+                        <h3 className="text-lg font-bold mb-4">Buyurtmani tasdiqlash</h3>
+                        <p className="mb-6">Buyurtmani tasdiqlaysizmi?</p>
+                        <div className="flex justify-end space-x-4">
+                            <button
+                                className="px-4 py-2 bg-gray-200 text-gray-800 rounded hover:bg-gray-300"
+                                onClick={() => setIsModalOpen(false)}
+                            >
+                                Bekor qilish
+                            </button>
+                            <button
+                                className="px-4 py-2 bg-primary-50 text-white rounded hover:bg-primary-60"
+                                onClick={confirmOrder}
+                            >
+                                Tasdiqlash
+                            </button>
+                        </div>
+                    </div>
+                </div>
             )}
             <Drawer isOpen={isOpen} setIsOpen={setIsOpen}>
                 <div className='flex items-center bg-primary-50 text-white px-3 justify-between py-3'>
@@ -164,9 +186,9 @@ const Home = () => {
                 {totalOrderCount > 0 && (
                     <button
                         onClick={handleConfirmOrder}
-                        className="fixed bottom-0 w-full bg-primary-50 text-white px-4 py-2 shadow-lg flex items-center justify-between"
+                        className="fixed bottom-0 w-full bg-primary-50 text-white px-4 py-4 shadow-lg flex items-center justify-between uppercase"
                     >
-                        <div className="flex items-center">
+                        <div className="flex items-center uppercase">
                             <CiShoppingBasket className='text-2xl mr-2' />
                             <span>Tasdiqlash</span>
                         </div>
