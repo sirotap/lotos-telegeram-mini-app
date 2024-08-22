@@ -26,9 +26,9 @@ export default function App() {
     }
 
     return (
-        <>
+        <main className='bg-white'>
             <Toaster position="top-right" reverseOrder={false} />
             <AppRoutes />
-        </>
+        </main>
     );
 }
