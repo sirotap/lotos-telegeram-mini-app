@@ -7,7 +7,7 @@ import CardOrder from './CardOrder';
 import toast from 'react-hot-toast';
 
 const Home = () => {
-    const [menuItems, setMenuItems] = useState([]);
+    const [menuItems, setMenuItems] = useState(Array(8).fill(null));
     const [orders, setOrders] = useState({});
     const [isOpen, setIsOpen] = useState(false);
     const [searchTerm, setSearchTerm] = useState('');
@@ -20,6 +20,7 @@ const Home = () => {
                 setMenuItems(data);
             } catch (error) {
                 console.error('Error fetching menu items:', error);
+                setMenuItems([]); // Set to empty array if there's an error
             }
         };
         fetchMenuItems();
@@ -56,12 +57,16 @@ const Home = () => {
     const totalOrderCount = Object.values(orders).reduce((sum, quantity) => sum + quantity, 0);
 
     const filteredMenuItems = menuItems.filter(item =>
-        item.name.toLowerCase().includes(searchTerm.toLowerCase())
+        item && item.name && item.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
+
     const calculateTotalPrice = () => {
         return menuItems.reduce((total, item) => {
-            const quantity = orders[item.id] || 0;
-            return total + (item.price * quantity);
+            if (item && item.id && item.price) {
+                const quantity = orders[item.id] || 0;
+                return total + (item.price * quantity);
+            }
+            return total;
         }, 0);
     };
     const handleConfirmOrder = () => {
@@ -76,7 +81,7 @@ const Home = () => {
                 quantity
             }))
         };
-    
+
         try {
             const response = await fetch('http://localhost:5000/api/Orders/NewOrder', {
                 method: 'POST',
@@ -85,7 +90,7 @@ const Home = () => {
                 },
                 body: JSON.stringify(orderData),
             });
-    
+
             if (response.ok) {
                 toast.success("Buyurtma muvaffaqiyatli yuborildi!");
                 setOrders({});
@@ -124,14 +129,14 @@ const Home = () => {
                 </button>
             </label>
             <div className="grid grid-cols-1 gap-4 px-5 py-10">
-                {filteredMenuItems.map((item) => (
+                {filteredMenuItems.map((item, index) => (
                     <Card
-                        key={item.id}
+                        key={item ? item.id : index}
                         item={item}
-                        onAddClick={() => handleAddClick(item.id)}
-                        onIncrement={() => handleIncrement(item.id)}
-                        onDecrement={() => handleDecrement(item.id)}
-                        quantity={orders[item.id] || 0}
+                        onAddClick={() => item && handleAddClick(item.id)}
+                        onIncrement={() => item && handleIncrement(item.id)}
+                        onDecrement={() => item && handleDecrement(item.id)}
+                        quantity={item ? (orders[item.id] || 0) : 0}
                     />
                 ))}
             </div>
@@ -175,11 +180,11 @@ const Home = () => {
                     </button>
                 </div>
 
-                {menuItems.map((item) => (
+                {menuItems.map((item, index) => (
                     <CardOrder
-                        key={item.id}
+                        key={item ? item.id : index}
                         item={item}
-                        quantity={orders[item.id] || 0}
+                        quantity={orders[item && item.id] || 0}
                         onUpdateOrder={handleUpdateOrder}
                     />
                 ))}

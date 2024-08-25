@@ -4,8 +4,8 @@ const CardOrder = ({ item, quantity, onUpdateOrder }) => {
     return (
         <div className="flex justify-between items-center mb-4 p-4 bg-white rounded-lg shadow">
             <div>
-                <h3 className="text-lg font-semibold">{item.name}</h3>
-                <p>{item.price.toLocaleString()} so&apos;m</p>
+                <h3 className="text-lg font-semibold">{item && item.name}</h3>
+                <p>{item && item.price.toLocaleString()} so&apos;m</p>
             </div>
             <div className="flex items-center">
                 <button
