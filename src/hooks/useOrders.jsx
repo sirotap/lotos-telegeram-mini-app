@@ -29,11 +29,12 @@ const useOrders = () => {
 
     const confirmOrder = async (comment) => {
         const orderData = {
+            orderId: Math.floor(10000 + Math.random() * 90000), // 5-digit random number
             storeItems: Object.entries(orders).map(([menuItemId, quantity]) => ({
                 menuItemId: parseInt(menuItemId),
                 quantity
             })),
-            comment: comment || "No comment"
+            comment: comment || "No comment" // Use the provided comment or a default value
         };
 
         try {
