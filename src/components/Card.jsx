@@ -46,7 +46,7 @@ const Card = ({ item, onAddClick, onIncrement, onDecrement, quantity }) => {
     };
 
     return (
-        <div className="rounded-2xl w-full max-w-[350px] mx-auto bg-slate-50 flex flex-col pb-4">
+        <div className="rounded-2xl w-full max-w-[350px] mx-auto bg-slate-50 flex flex-col pb-4 border">
 
             <div className="relative flex-none sm:w-60 md:h-42 h-40 sm:h-auto">
                 <div className="absolute inset-0 bg-cover bg-center filter blur-sm before:absolute before:inset-0 before:bg-cover before:bg-center before:content-[''] before:filter before:blur-sm before:rounded-md before:z-[-1]" style={{ backgroundImage: `url(${`http://localhost:5000/api/Files?id=${item.image}`})` }}></div>

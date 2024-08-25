@@ -109,7 +109,7 @@ const Home = () => {
             <label className="max-w-[350px] mb-4 mt-8 relative bg-white min-w-sm mx-auto flex flex-row items-center justify-center border py-1 px-2 rounded-2xl gap-2 shadow-2xl focus-within:border-gray-300" htmlFor="search-bar">
                 <input
                     id="search-bar"
-                    placeholder="Search"
+                    placeholder="Ovqat nomi"
                     className="px-6 py-2 w-full rounded-md flex-1 outline-none bg-white"
                     value={searchTerm}
                     onChange={handleSearch}
@@ -123,12 +123,12 @@ const Home = () => {
                             </svg>
                         </div>
                         <div className="flex items-center transition-all opacity-1 valid:">
-                            <span className="text-sm font-semibold whitespace-nowrap truncate mx-auto">Search</span>
+                            <span className="text-sm font-semibold whitespace-nowrap truncate mx-auto">Qidirish</span>
                         </div>
                     </div>
                 </button>
             </label>
-            <div className="grid grid-cols-1 gap-4 px-5 py-10">
+            <div className="grid grid-cols-1 gap-4 px-5 pt-5 pb-20">
                 {filteredMenuItems.map((item, index) => (
                     <Card
                         key={item ? item.id : index}
