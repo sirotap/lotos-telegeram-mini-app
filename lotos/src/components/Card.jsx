@@ -2,7 +2,6 @@
 /* eslint-disable react/no-unescaped-entities */
 import { useState } from 'react';
 import toast from 'react-hot-toast';
-import errorImage from '../assets/ads.jpg'
 
 const Card = ({ item, onAddClick, onIncrement, onDecrement, quantity }) => {
     const [isAdding, setIsAdding] = useState(quantity === 0);
@@ -51,16 +50,7 @@ const Card = ({ item, onAddClick, onIncrement, onDecrement, quantity }) => {
 
             <div className="relative flex-none sm:w-60 md:h-42 h-40 sm:h-auto">
                 <div className="absolute inset-0 bg-cover bg-center filter blur-sm before:absolute before:inset-0 before:bg-cover before:bg-center before:content-[''] before:filter before:blur-sm before:rounded-md before:z-[-1]" style={{ backgroundImage: `url(${`http://localhost:5000/api/Files?id=${item.image}`})` }}></div>
-                <img 
-                    src={`http://localhost:5000/api/Files?id=${item.image}`} 
-                    alt={item.name} 
-                    className='absolute inset-0 w-full h-full object-cover rounded-md mx-auto' 
-                    loading="lazy" 
-                    onError={(e) => {
-                        e.target.onerror = null;
-                        e.target.src =errorImage; // Replace with a path to a default image
-                    }}
-                />
+                <img src={`http://localhost:5000/api/Files?id=${item.image}`} alt="Ad icon" className='absolute inset-0 h-full object-cover rounded-md mx-auto' loading="lazy" />
             </div>
             <div className="mt-3 max-w-[90%] mx-auto w-full">
                 <h3 className="text-2xl font-semibold">{item.price.toLocaleString()} so'm</h3>

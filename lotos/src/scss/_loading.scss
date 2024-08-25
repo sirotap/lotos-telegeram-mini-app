@@ -1,0 +1,58 @@
+$fontColor: #fff;
+
+.loading-anima {
+    background: #e49a23;
+    width: 100vw;
+    height: 100vh;
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed; // Fixed position to cover the entire viewport
+    top: 0;
+    left: 0;
+    animation: none; // Default, no animation applied
+}
+.slide-up {
+    animation: slide-up 0.8s ease-out forwards; // Sahifa yuklangandan keyin animatsiyani qo'llash
+}
+
+.loading-anima svg {
+    width: 100px;
+    height: 100px;
+    margin: 20px;
+    display: inline-block;
+}
+
+.made-with-love {
+    margin-top: 20px;
+    padding: 10px;
+    font-size: 10px;
+    font-family: arial;
+    color: #fff;
+    i {
+        font-style: normal;
+        color: #fff;
+        font-size: 14px;
+        position: relative;
+        top: 2px;
+    }
+    a {
+        color: #fff;
+        text-decoration: none;
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}
+
+@keyframes slide-up {
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+}
