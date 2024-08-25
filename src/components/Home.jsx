@@ -93,16 +93,18 @@ const Home = () => {
 
                 {totalOrderCount > 0 ? (
                     <>
-                        {menuItems.map((item) => (
-                            orders[item.id] ? (
-                                <CardOrder
-                                    key={item.id}
-                                    item={item}
-                                    quantity={orders[item.id]}
-                                    onUpdateOrder={updateOrder}
-                                />
-                            ) : null
-                        ))}
+                        <div className='px-5'>
+                            {menuItems.map((item) => (
+                                orders[item.id] ? (
+                                    <CardOrder
+                                        key={item.id}
+                                        item={item}
+                                        quantity={orders[item.id]}
+                                        onUpdateOrder={updateOrder}
+                                    />
+                                ) : null
+                            ))}
+                        </div>
                         <div className="px-4 py-2">
                             <textarea
                                 placeholder="Buyurtma uchun izoh..."
@@ -111,6 +113,12 @@ const Home = () => {
                                 className="w-full py-2 px-3 text-gray-700 bg-white border rounded-md focus:border-primary-50 focus:outline-none focus:ring focus:ring-primary-50 focus:ring-opacity-40"
                                 rows="3"
                             />
+                            <button
+                                onClick={() => setIsDrawerOpen(false)}
+                                className="mt-2 w-full bg-yellow-500 text-white px-4 py-2 rounded-md hover:bg-yellow-600 transition-colors duration-300"
+                            >
+                                Biror narsani unutmadingizmi?
+                            </button>
                         </div>
                         <button
                             onClick={() => setIsModalOpen(true)}
