@@ -15,10 +15,9 @@ export default function App() {
     useEffect(() => {
         Aos.init({ duration: 800 });
 
-        // Simulate loading time
         const timer = setTimeout(() => {
-            setLoadingClass('loading-anima slide-up'); // Trigger animation
-            setTimeout(() => setIsLoading(false), 500); // Wait for animation to finish
+            setLoadingClass('loading-anima slide-up');
+            setTimeout(() => setIsLoading(false), 500);
         }, 1000);
 
         return () => clearTimeout(timer);
@@ -28,6 +27,7 @@ export default function App() {
         const handleOnline = () => {
             setIsOnline(true);
             setOfflineTimer(60);
+            setShowOfflineMessage(false);
         };
         const handleOffline = () => {
             setIsOnline(false);
@@ -36,6 +36,8 @@ export default function App() {
 
         window.addEventListener('online', handleOnline);
         window.addEventListener('offline', handleOffline);
+
+        setIsOnline(navigator.onLine);
 
         return () => {
             window.removeEventListener('online', handleOnline);
@@ -47,10 +49,13 @@ export default function App() {
         let intervalId;
         if (!isOnline && offlineTimer > 0) {
             intervalId = setInterval(() => {
-                setOfflineTimer((prevTimer) => prevTimer - 1);
+                setOfflineTimer((prevTimer) => {
+                    if (prevTimer === 1) {
+                        window.location.href = 'https://kun.uz';
+                    }
+                    return prevTimer - 1;
+                });
             }, 1000);
-        } else if (offlineTimer === 0) {
-            window.location.href = 'https://kun.uz';
         }
 
         return () => {
@@ -62,25 +67,25 @@ export default function App() {
         return <div className={loadingClass}><LoadingPage /></div>;
     }
 
-    if (!isOnline) {
-        return (
-            <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center z-50">
-                <div className="bg-white p-6 rounded-lg shadow-xl text-center">
-                    <h2 className="text-2xl font-bold mb-4">Internet aloqasi uzildi</h2>
-                    <p className="mb-4">Iltimos, internet aloqangizni tekshiring va qayta ulaning.</p>
-                    {showOfflineMessage && (
-                        <p className="text-sm text-gray-600">
-                            Agar {offlineTimer} soniya ichida internet tiklanmasa, siz avtomatik ravishda kun.uz saytiga yo&apos;naltirilasiz.
-                        </p>
-                    )}
-                </div>
-            </div>
-        );
-    }
-
     return (
         <main className='bg-white'>
             <Toaster position="top-right" reverseOrder={false} />
+            {!isOnline && (
+                <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center z-50">
+                    <div className="bg-white p-6 rounded-lg shadow-xl text-center">
+                        <h2 className="text-2xl font-bold mb-4">Internet aloqasi uzildi</h2>
+                        <p className="mb-4">Iltimos, internet aloqangizni tekshiring va qayta ulaning.</p>
+                        {showOfflineMessage && (
+                            <p className="text-sm text-gray-600">
+                                Agar {offlineTimer} soniya ichida internet tiklanmasa, siz avtomatik ravishda kun.uz saytiga yo'naltirilasiz.
+                            </p>
+                        )}
+                        <div className="mt-4 text-3xl font-bold">
+                            {offlineTimer}
+                        </div>
+                    </div>
+                </div>
+            )}
             <AppRoutes />
         </main>
     );
