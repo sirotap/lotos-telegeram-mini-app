@@ -4,7 +4,7 @@ const BASE_URL = 'http://localhost:5000/api';
 export const ApiService = {
     async fetchMenuItems() {
         try {
-            const response = await fetch(`${BASE_URL}/MenuItems`);
+            const response = await fetch(`${BASE_URL}/MenuItems/`);
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
@@ -46,6 +46,26 @@ export const ApiService = {
             }
         } catch (error) {
             console.error('Error sending order:', error);
+            throw error;
+        }
+    },
+
+    async getOrderIngredients(orderId) {
+        if (!orderId) {
+            throw new Error('Order ID is undefined');
+        }
+        console.log(orderId);
+        try {
+            const response = await fetch(`${BASE_URL}/Orders/GetIngredients?id=${orderId}`);
+            if (!response.ok) {
+                if (response.status === 404) {
+                    return null; // Ma'lumot topilmadi
+                }
+                throw new Error('Network response was not ok');
+            }
+            return await response.json();
+        } catch (error) {
+            console.error('Error fetching order ingredients:', error);
             throw error;
         }
     }
