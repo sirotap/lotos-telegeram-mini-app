@@ -14,11 +14,13 @@ const useOrders = () => {
     };
     const decrementOrder = (itemId) => {
         setOrders(prev => {
-            if (prev[itemId] > 1) {
-                return { ...prev, [itemId]: prev[itemId] - 1 };
+            const newQuantity = prev[itemId] - 1;
+            if (newQuantity > 0) {
+                return { ...prev, [itemId]: newQuantity };
             } else {
-                const { [itemId]: _, ...rest } = prev;
-                return rest;
+                const newOrders = { ...prev };
+                delete newOrders[itemId];
+                return newOrders;
             }
         });
     };

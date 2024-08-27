@@ -54,7 +54,6 @@ export const ApiService = {
         if (!orderId) {
             throw new Error('Order ID is undefined');
         }
-        console.log(orderId);
         try {
             const response = await fetch(`${BASE_URL}/Orders/GetIngredients?id=${orderId}`);
             if (!response.ok) {
