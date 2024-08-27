@@ -61,7 +61,7 @@ const OrderById = () => {
     if (!orderData) return <div className="flex justify-center items-center h-screen bg-white text-[#000000] text-xl">Ma&apos;lumot topilmadi</div>;
 
     return (
-        <main className="container mx-auto px-4 bg-white min-h-screen">
+        <main className="container mx-auto px-4 bg-white min-h-[100svh]">
             <NavbarTop />
             <section className="mt-8 bg-[#FFFFFF] rounded-lg shadow-lg p-6">
                 <div className="flex items-center justify-between mb-4">
