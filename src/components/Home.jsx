@@ -1,11 +1,11 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { CiShoppingBasket, CiRead } from "react-icons/ci";
 import useMenuItems from '../hooks/useMenuItems';
 import useOrders from '../hooks/useOrders';
 import Card from './Card';
 import Drawer from './Drawer';
 import CardOrder from './CardOrder';
-import SearchBar from './/SearchBar';
+import SearchBar from './SearchBar';
 import OrderConfirmationModal from './OrderConfirmationModal';
 
 const Home = () => {
@@ -29,9 +29,13 @@ const Home = () => {
     const handleSearch = (event) => {
         setSearchTerm(event.target.value);
     };
-    const filteredMenuItems = menuItems.filter(item =>
-        item && item.name && item.name.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+
+    const filteredMenuItems = useMemo(() => {
+        return menuItems.filter(item =>
+            item && item.name && item.name.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+    }, [menuItems, searchTerm]);
+
     const handleCommentChange = (e) => {
         setOrderComment(e.target.value);
     };
@@ -45,9 +49,12 @@ const Home = () => {
         }
     };
 
+    const handleUpdateQuantity = (itemId, newQuantity) => {
+        updateOrder(itemId, newQuantity);
+    };
+
     if (isLoading) return <div>Loading...</div>;
     if (error) return <div>Error: {error}</div>;
-console.log(menuItems)
     return (
         <div className="bg-white dark:bg-gray-900 min-h-[70svh] h-full">
             <SearchBar searchTerm={searchTerm} onSearch={handleSearch} />
@@ -55,13 +62,14 @@ console.log(menuItems)
             <div className="grid grid-cols-1 gap-4 px-5 pt-5 pb-20">
                 {filteredMenuItems.map((item) => (
                     <Card
-                        key={item.id}
-                        item={item}
-                        onAddClick={() => addToOrder(item.id)}
-                        onIncrement={() => incrementOrder(item.id)}
-                        onDecrement={() => decrementOrder(item.id)}
-                        quantity={orders[item.id] || 0}
-                    />
+                    key={item.id}
+                    item={item}
+                    onAddClick={() => addToOrder(item.id)}
+                    onIncrement={() => incrementOrder(item.id)}
+                    onDecrement={() => decrementOrder(item.id)}
+                    onUpdateQuantity={handleUpdateQuantity}
+                    quantity={orders[item.id] || 0}
+                />
                 ))}
             </div>
 

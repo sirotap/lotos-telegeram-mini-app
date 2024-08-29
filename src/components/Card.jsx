@@ -1,26 +1,18 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/no-unescaped-entities */
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import toast from 'react-hot-toast';
 import errorImage from '../assets/ads.jpg'
 
-const Card = ({ item, onAddClick, onIncrement, onDecrement, quantity }) => {
+const Card = ({ item, onAddClick, onIncrement, onDecrement, quantity, onUpdateQuantity }) => {
     const [isAdding, setIsAdding] = useState(quantity === 0);
+    const [inputQuantity, setInputQuantity] = useState(quantity.toString());
+
+    useEffect(() => {
+        setInputQuantity(quantity.toString());
+    }, [quantity]);
 
     if (!item) {
-        return (
-            <div className="rounded-2xl w-full max-w-[350px] mx-auto bg-slate-50 flex flex-col pb-4 animate-pulse">
-                <div className="rounded-2xl w-full h-[200px] bg-gray-300 skeleton"></div>
-                <div className="mt-3 max-w-[90%] mx-auto w-full">
-                    <div className="h-6 bg-gray-300 rounded w-3/4 mb-2 skeleton "></div>
-                    <div className="h-4 bg-gray-300 rounded w-1/2 mb-2"></div>
-                    <div className="h-4 bg-gray-300 rounded w-full mb-3"></div>
-                    <div className="h-10 bg-gray-300 rounded w-full"></div>
-                </div>
-            </div>
-        );
-    }
-    if (!item.image) {
         return null;
     }
 
@@ -30,11 +22,7 @@ const Card = ({ item, onAddClick, onIncrement, onDecrement, quantity }) => {
     };
 
     const handleIncrement = () => {
-        if (quantity < 50) {
-            onIncrement();
-        } else {
-            toast.error("Admin bilan bog'laning");
-        }
+        onIncrement();
     };
 
     const handleDecrement = () => {
@@ -43,6 +31,23 @@ const Card = ({ item, onAddClick, onIncrement, onDecrement, quantity }) => {
         } else {
             setIsAdding(true);
             onDecrement();
+        }
+    };
+
+    const handleInputChange = (e) => {
+        const value = e.target.value;
+        if (/^\d*$/.test(value)) {
+            setInputQuantity(value);
+        }
+    };
+
+    const handleInputBlur = () => {
+        const newQuantity = parseInt(inputQuantity, 10);
+        if (!isNaN(newQuantity) && newQuantity >= 0) {
+            onUpdateQuantity(item.id, newQuantity);
+        } else {
+            setInputQuantity(quantity.toString());
+            toast.error("Пожалуйста, введите корректное количество");
         }
     };
 
@@ -58,7 +63,7 @@ const Card = ({ item, onAddClick, onIncrement, onDecrement, quantity }) => {
                     loading="lazy" 
                     onError={(e) => {
                         e.target.onerror = null;
-                        e.target.src =errorImage; // Replace with a path to a default image
+                        e.target.src = errorImage; // Replace with a path to a default image
                     }}
                 />
             </div>
@@ -81,7 +86,14 @@ const Card = ({ item, onAddClick, onIncrement, onDecrement, quantity }) => {
                         >
                             -
                         </button>
-                        <span className="w-16 text-center py-2 text-xl">{quantity}</span>
+                        <input
+                            type="text"
+                            value={inputQuantity}
+                            onChange={handleInputChange}
+                            onBlur={handleInputBlur}
+                            placeholder="Yozing"
+                            className="w-16 text-center py-2 text-xl bg-transparent dark:text-white"
+                        />
                         <button
                             onClick={handleIncrement}
                             className="px-5 py-3 bg-primary-50 text-white rounded-r-xl border-l-2 border-gray-300 flex items-center justify-center"
