@@ -32,7 +32,7 @@ const useOrders = () => {
     };
 
     const confirmOrder = async (comment) => {
-        const Id = searchParams.get('id');
+        const Id = searchParams.get('id') ? searchParams.get('id'): 0;
         const orderData = {
             orderId: Id, // 5-digit random number
             storeItems: Object.entries(orders).map(([menuItemId, quantity]) => ({
