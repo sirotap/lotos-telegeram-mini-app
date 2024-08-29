@@ -47,7 +47,7 @@ const Card = ({ item, onAddClick, onIncrement, onDecrement, quantity }) => {
     };
 
     return (
-        <div className="rounded-2xl w-full max-w-[350px] mx-auto bg-slate-50 flex flex-col pb-4 border">
+        <div className="rounded-2xl w-full max-w-[350px] mx-auto bg-slate-50 dark:bg-gray-800 flex flex-col pb-4 border dark:border-gray-700">
 
             <div className="relative flex-none sm:w-60 md:h-42 h-40 sm:h-auto">
                 <div className="absolute inset-0 bg-cover bg-center filter blur-sm before:absolute before:inset-0 before:bg-cover before:bg-center before:content-[''] before:filter before:blur-sm before:rounded-md before:z-[-1]" style={{ backgroundImage: `url(${`https://lotosapi.algorithmic.uz/api/Files?id=${item.image}`})` }}></div>
@@ -63,8 +63,8 @@ const Card = ({ item, onAddClick, onIncrement, onDecrement, quantity }) => {
                 />
             </div>
             <div className="mt-3 max-w-[90%] mx-auto w-full">
-                <h3 className="text-2xl font-semibold">{item.price.toLocaleString()} so'm</h3>
-                <h4 className="text-xl">{item.name}</h4>
+                <h3 className="text-2xl font-semibold dark:text-white">{item.price.toLocaleString()} so'm</h3>
+                <h4 className="text-xl dark:text-gray-300">{item.name}</h4>
                 <p className="text-gray-400 mt-3">{item.description}</p>
                 {isAdding || quantity == 0 ? (
                     <button

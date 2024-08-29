@@ -1,27 +1,26 @@
 /* eslint-disable react/prop-types */
-// KartaBuyurtma komponenti
 const CardOrder = ({ item, quantity, onUpdateOrder }) => {
     if (!item) {
-        return null; // or return a placeholder component
+        return null;
     }
 
     return (
-        <div className="flex justify-between items-center mb-4 p-4 bg-white rounded-lg shadow">
+        <div className="flex justify-between items-center mb-4 p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
             <div>
-                <h3 className="text-lg font-semibold">{item.name}</h3>
-                <p>{item.price.toLocaleString()} сум</p>
+                <h3 className="text-lg font-semibold dark:text-white">{item.name}</h3>
+                <p className="dark:text-gray-300">{item.price.toLocaleString()} сум</p>
             </div>
             <div className="flex items-center">
                 <button
                     onClick={() => onUpdateOrder(item.id, Math.max(0, quantity - 1))}
-                    className="px-2 py-1 bg-gray-200 rounded-l"
+                    className="px-2 py-1 bg-gray-200 dark:bg-gray-700 dark:text-white rounded-l"
                 >
                     -
                 </button>
-                <span className="px-4 py-1 bg-gray-100">{quantity}</span>
+                <span className="px-4 py-1 bg-gray-100 dark:bg-gray-600 dark:text-white">{quantity}</span>
                 <button
                     onClick={() => onUpdateOrder(item.id, quantity + 1)}
-                    className="px-2 py-1 bg-gray-200 rounded-r"
+                    className="px-2 py-1 bg-gray-200 dark:bg-gray-700 dark:text-white rounded-r"
                 >
                     +
                 </button>

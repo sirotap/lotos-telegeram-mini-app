@@ -26,7 +26,6 @@ const OrderById = () => {
             try {
                 const data = await ApiService.getOrderIngredients(orderId);
                 if (data) {
-                    // Bir xil ingredientlarni birlashtirish
                     const combinedIngredients = data.ingredients.reduce((acc, curr) => {
                         const existingIngredient = acc.find(item => item.ingredientName === curr.ingredientName);
                         if (existingIngredient) {
@@ -56,16 +55,16 @@ const OrderById = () => {
         toast.success('ID заказа скопирован!');
     };
 
-    if (loading) return <div className="flex justify-center items-center h-screen bg-white"><div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-[#EEA734]"></div></div>;
-    if (error) return <div className="flex justify-center items-center h-screen bg-white text-[#000000] text-xl">{error}</div>;
-    if (!orderData) return <div className="flex justify-center items-center h-screen bg-white text-[#000000] text-xl">Ma&apos;lumot topilmadi</div>;
+    if (loading) return <div className="flex justify-center items-center h-screen bg-white dark:bg-gray-900"><div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-[#EEA734]"></div></div>;
+    if (error) return <div className="flex justify-center items-center h-screen bg-white dark:bg-gray-900 text-[#000000] dark:text-white text-xl">{error}</div>;
+    if (!orderData) return <div className="flex justify-center items-center h-screen bg-white dark:bg-gray-900 text-[#000000] dark:text-white text-xl">Ma&apos;lumot topilmadi</div>;
 
     return (
-        <main className="container mx-auto px-4 bg-white min-h-[100svh]">
+        <main className="container mx-auto px-4 bg-white dark:bg-gray-900 min-h-[100svh]">
             <NavbarTop />
-            <section className="mt-8 bg-[#FFFFFF] rounded-lg shadow-lg p-6">
+            <section className="mt-8 bg-[#FFFFFF] dark:bg-gray-800 rounded-lg shadow-lg p-6">
                 <div className="flex items-center justify-between mb-4">
-                    <h1 className="text-3xl font-bold text-[#000000]">Заказ</h1>
+                    <h1 className="text-3xl font-bold text-[#000000] dark:text-white">Заказ</h1>
                     <button 
                         onClick={copyOrderId}
                         className="flex items-center bg-[#EEA734] text-white px-4 py-2 rounded-md hover:bg-opacity-80 transition duration-300"
@@ -73,7 +72,7 @@ const OrderById = () => {
                         #{orderData.orderId} <FaClipboard className="ml-2" />
                     </button>
                 </div>
-                <h2 className="text-2xl font-semibold mb-4 text-[#000000]">Продукты:</h2>
+                <h2 className="text-2xl font-semibold mb-4 text-[#000000] dark:text-white">Продукты:</h2>
                 {orderData.ingredients && orderData.ingredients.length > 0 ? (
                     <ul className="space-y-4">
                         {orderData.ingredients.map((ingredient, index) => (
@@ -86,7 +85,7 @@ const OrderById = () => {
                         ))}
                     </ul>
                 ) : (
-                    <p className="text-[#000000]">Ингредиенты отсутствуют</p>
+                    <p className="text-[#000000] dark:text-white">Ингредиенты отсутствуют</p>
                 )}
             </section>
         </main>

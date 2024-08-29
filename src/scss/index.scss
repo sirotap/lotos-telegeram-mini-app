@@ -9,9 +9,11 @@
     margin: 0;
     padding: 0;
 }
+
 html {
     scroll-behavior: smooth;
 }
+
 @font-face {
     font-family: "Poppins";
     src: url("../fonts/Poppins-Regular.ttf") format("opentype");
@@ -22,4 +24,10 @@ html {
 body {
     font-family: "Poppins", sans-serif;
     overflow-x: hidden;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+// Add this to ensure smooth transitions for all elements
+* {
+    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
 }

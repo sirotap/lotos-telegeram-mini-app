@@ -13,8 +13,8 @@ const Welcome = () => (
             <img src={illustration1} alt="illustration" className="h-56 w-48" loading="lazy"/>
         </div>
         <div className="h-32">
-            <h3 className="text-2xl font-semibold">Добро пожаловать</h3>
-            <p className="text-base px-5 pt-5">Приятно познакомиться. Мы рады, что вы здесь, так что давайте начнем!</p>
+            <h3 className="text-2xl font-semibold dark:text-white">Добро пожаловать</h3>
+            <p className="text-base px-5 pt-5 dark:text-gray-300">Приятно познакомиться. Мы рады, что вы здесь, так что давайте начнем!</p>
         </div>
     </>
 );
@@ -25,8 +25,8 @@ const AllYourFavorites = () => (
             <img src={illustration2} alt="illustration"className="h-56 w-56" loading="lazy" />
         </div>
         <div className="h-32">
-            <h3 className="text-2xl font-semibold">Все ваши любимые блюда</h3>
-            <p className="text-base px-5 pt-5">Заказывайте в лучших местных ресторанах с легкой доставкой по требованию.</p>
+            <h3 className="text-2xl font-semibold dark:text-white">Все ваши любимые блюда</h3>
+            <p className="text-base px-5 pt-5 dark:text-gray-300">Заказывайте в лучших местных ресторанах с легкой доставкой по требованию.</p>
         </div>
     </>
 );
@@ -37,8 +37,8 @@ const FreeDeliveryOffers = () => (
             <img src={illustration3} alt="illustration" className="h-56 w-56" loading="lazy"/>
         </div>
         <div className="h-32">
-            <h3 className="text-2xl font-semibold">Предложения бесплатной доставки</h3>
-            <p className="text-base px-5 pt-5">Бесплатная доставка для новых клиентов через Apple Pay и другие способы оплаты.</p>
+            <h3 className="text-2xl font-semibold dark:text-white">Предложения бесплатной доставки</h3>
+            <p className="text-base px-5 pt-5 dark:text-gray-300">Бесплатная доставка для новых клиентов через Apple Pay и другие способы оплаты.</p>
         </div>
     </>
 );
@@ -49,8 +49,8 @@ const ChooseYourFood = () => (
             <img src={illustration4} alt="illustration" className="h-56 w-48" loading="lazy"/>
         </div>
         <div className="h-32">
-            <h3 className="text-2xl font-semibold">Выберите свою еду</h3>
-            <p className="text-base px-5 pt-5">Легко найдите тип еды, которую вы хотите, и получите доставку в широком диапазоне.</p>
+            <h3 className="text-2xl font-semibold dark:text-white">Выберите свою еду</h3>
+            <p className="text-base px-5 pt-5 dark:text-gray-300">Легко найдите тип еды, которую вы хотите, и получите доставку в широком диапазоне.</p>
         </div>
     </>
 );
@@ -76,11 +76,11 @@ const Start = () => {
     };
 
     return (
-        <div className="flex flex-col items-center text-center pt-10 justify-around h-[100svh] px-5 bg-white">
+        <div className="flex flex-col items-center text-center pt-10 justify-around h-[100svh] px-5 bg-white dark:bg-gray-900">
             <img src={circleImg} alt="circle" className="absolute -z-10 top-0 left-0" />
             <div className="flex items-center gap-x-2">
                 <img src={logo} alt="img" className="w-14" />
-                <h1 className="text-4xl font-bold">Tamang <br /> FoodService</h1>
+                <h1 className="text-4xl font-bold dark:text-white">Tamang <br /> FoodService</h1>
             </div>
             <Routes>
                 <Route path="/1" element={<AllYourFavorites />} />

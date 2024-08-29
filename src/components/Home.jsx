@@ -49,7 +49,7 @@ const Home = () => {
     if (error) return <div>Error: {error}</div>;
 console.log(menuItems)
     return (
-        <div className="bg-white min-h-[70svh] h-full">
+        <div className="bg-white dark:bg-gray-900 min-h-[70svh] h-full">
             <SearchBar searchTerm={searchTerm} onSearch={handleSearch} />
 
             <div className="grid grid-cols-1 gap-4 px-5 pt-5 pb-20">
@@ -68,7 +68,7 @@ console.log(menuItems)
             {totalOrderCount > 0 && (
                 <button
                     onClick={() => setIsDrawerOpen(true)}
-                    className="fixed uppercase gap-x-2 bottom-0 w-full bg-primary-50 px-4 py-4 shadow-lg flex items-center text-white text-center justify-center"
+                    className="fixed uppercase gap-x-2 bottom-0 w-full bg-primary-50 dark:bg-primary-600 px-4 py-4 shadow-lg flex items-center text-white text-center justify-center"
                 >
                     <CiRead className='text-2xl' /> Перейти к заказу({totalOrderCount})
                 </button>
