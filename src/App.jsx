@@ -73,11 +73,11 @@ export default function App() {
             {!isOnline && (
                 <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center z-50">
                     <div className="bg-white p-6 rounded-lg shadow-xl text-center">
-                        <h2 className="text-2xl font-bold mb-4">Internet aloqasi uzildi</h2>
-                        <p className="mb-4">Iltimos, internet aloqangizni tekshiring va qayta ulaning.</p>
+                        <h2 className="text-2xl font-bold mb-4">Соединение с интернетом потеряно</h2>
+                        <p className="mb-4">Пожалуйста, проверьте ваше интернет-соединение и попробуйте снова.</p>
                         {showOfflineMessage && (
                             <p className="text-sm text-gray-600">
-                                Agar {offlineTimer} soniya ichida internet tiklanmasa, siz avtomatik ravishda kun.uz saytiga yo'naltirilasiz.
+                                Если интернет не восстановится в течение {offlineTimer} секунд, вы будете автоматически перенаправлены на сайт kun.uz.
                             </p>
                         )}
                         <div className="mt-4 text-3xl font-bold">

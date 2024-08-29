@@ -13,8 +13,8 @@ const Welcome = () => (
             <img src={illustration1} alt="illustration" className="h-56 w-48" loading="lazy"/>
         </div>
         <div className="h-32">
-            <h3 className="text-2xl font-semibold">Welcome</h3>
-            <p className="text-base px-5 pt-5">It’s a pleasure to meet you. We are excited that you’re here so let’s get started!</p>
+            <h3 className="text-2xl font-semibold">Добро пожаловать</h3>
+            <p className="text-base px-5 pt-5">Приятно познакомиться. Мы рады, что вы здесь, так что давайте начнем!</p>
         </div>
     </>
 );
@@ -25,8 +25,8 @@ const AllYourFavorites = () => (
             <img src={illustration2} alt="illustration"className="h-56 w-56" loading="lazy" />
         </div>
         <div className="h-32">
-            <h3 className="text-2xl font-semibold">All your favorites</h3>
-            <p className="text-base px-5 pt-5">Order from the best local restaurants with easy, on-demand delivery.</p>
+            <h3 className="text-2xl font-semibold">Все ваши любимые блюда</h3>
+            <p className="text-base px-5 pt-5">Заказывайте в лучших местных ресторанах с легкой доставкой по требованию.</p>
         </div>
     </>
 );
@@ -37,8 +37,8 @@ const FreeDeliveryOffers = () => (
             <img src={illustration3} alt="illustration" className="h-56 w-56" loading="lazy"/>
         </div>
         <div className="h-32">
-            <h3 className="text-2xl font-semibold">Free delivery offers</h3>
-            <p className="text-base px-5 pt-5">Free delivery for new customers via Apple Pay and others payment methods.</p>
+            <h3 className="text-2xl font-semibold">Предложения бесплатной доставки</h3>
+            <p className="text-base px-5 pt-5">Бесплатная доставка для новых клиентов через Apple Pay и другие способы оплаты.</p>
         </div>
     </>
 );
@@ -49,8 +49,8 @@ const ChooseYourFood = () => (
             <img src={illustration4} alt="illustration" className="h-56 w-48" loading="lazy"/>
         </div>
         <div className="h-32">
-            <h3 className="text-2xl font-semibold">Choose your food</h3>
-            <p className="text-base px-5 pt-5">Easily find your type of food craving and you’ll get delivery in wide range.</p>
+            <h3 className="text-2xl font-semibold">Выберите свою еду</h3>
+            <p className="text-base px-5 pt-5">Легко найдите тип еды, которую вы хотите, и получите доставку в широком диапазоне.</p>
         </div>
     </>
 );
@@ -96,7 +96,7 @@ const Start = () => {
                         onClick={handleNext} 
                         className="bg-primary-50 text-white text-base w-full py-3 rounded-md"
                     >
-                        {step === 3 ? "Menyuni ko'rish" : "Next"}
+                        {step === 3 ? "Посмотреть меню" : "Далее"}
                     </button>
                 )}
             </footer>

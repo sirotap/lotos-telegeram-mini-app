@@ -70,7 +70,7 @@ const Home = () => {
                     onClick={() => setIsDrawerOpen(true)}
                     className="fixed uppercase gap-x-2 bottom-0 w-full bg-primary-50 px-4 py-4 shadow-lg flex items-center text-white text-center justify-center"
                 >
-                    <CiRead className='text-2xl' /> Buyurtmaga o&apos;tish({totalOrderCount})
+                    <CiRead className='text-2xl' /> Перейти к заказу({totalOrderCount})
                 </button>
             )}
 
@@ -83,7 +83,7 @@ const Home = () => {
 
             <Drawer isOpen={isDrawerOpen} setIsOpen={setIsDrawerOpen}>
                 <div className='flex items-center bg-primary-50 text-white px-3 justify-between py-3'>
-                    <h2 className="text-2xl font-bold">Buyurtmalar</h2>
+                    <h2 className="text-2xl font-bold">Заказы</h2>
                     <button onClick={() => setIsDrawerOpen(false)}>
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -107,7 +107,7 @@ const Home = () => {
                         </div>
                         <div className="px-4 py-2">
                             <textarea
-                                placeholder="Buyurtma uchun izoh..."
+                                placeholder="Комментарий к заказу..."
                                 value={orderComment}
                                 onChange={handleCommentChange}
                                 className="w-full py-2 px-3 text-gray-700 bg-white border rounded-md focus:border-primary-50 focus:outline-none focus:ring focus:ring-primary-50 focus:ring-opacity-40"
@@ -117,7 +117,7 @@ const Home = () => {
                                 onClick={() => setIsDrawerOpen(false)}
                                 className="mt-2 w-full bg-yellow-500 text-white px-4 py-2 rounded-md hover:bg-yellow-600 transition-colors duration-300"
                             >
-                                Biror narsani unutmadingizmi?
+                                Вы ничего не забыли?
                             </button>
                         </div>
                         <button
@@ -126,7 +126,7 @@ const Home = () => {
                         >
                             <div className="flex items-center uppercase">
                                 <CiShoppingBasket className='text-2xl mr-2' />
-                                <span>Tasdiqlash</span>
+                                <span>Подтвердить</span>
                             </div>
                             <span className="font-bold">{calculateTotalPrice(menuItems).toLocaleString()} so&apos;m</span>
                         </button>
@@ -134,9 +134,9 @@ const Home = () => {
                 ) : (
                     <div className="flex flex-col items-center justify-center h-full p-6 text-center">
                         <CiShoppingBasket className="text-7xl text-gray-300 mb-6" />
-                        <p className="text-2xl font-semibold text-gray-600 mb-4">Savatingiz bo&apos;sh</p>
+                        <p className="text-2xl font-semibold text-gray-600 mb-4">Ваша корзина пуста</p>
                         <p className="text-gray-500 mb-8 max-w-md">
-                            Hozircha savatingizda hech narsa yo&apos;q. Mahsulotlarni ko&apos;rib chiqing va o&apos;zingizga yoqqanini qo&apos;shing!
+                            В вашей корзине пока ничего нет. Просмотрите товары и добавьте то, что вам понравится!
                         </p>
                         <button
                             onClick={() => setIsDrawerOpen(false)}
@@ -145,7 +145,7 @@ const Home = () => {
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
                             </svg>
-                            <span>Mahsulotlarni ko&apos;rish</span>
+                            <span>Просмотреть товары</span>
                         </button>
                     </div>
                 )}

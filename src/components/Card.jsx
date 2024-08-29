@@ -71,7 +71,7 @@ const Card = ({ item, onAddClick, onIncrement, onDecrement, quantity }) => {
                         onClick={handleAddClick}
                         className="mx-auto w-full py-3 bg-primary-50 text-white shadow-md rounded-xl max-w-sm mt-3 text-base"
                     >
-                        + Qo'shish
+                        + Добавить
                     </button>
                 ) : (
                     <div className="flex items-center justify-between mx-auto w-full bg-gray-200 rounded-xl max-w-sm mt-3 text-base">

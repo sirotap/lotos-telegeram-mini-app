@@ -18,7 +18,7 @@ const OrderById = () => {
             const orderId = id || searchParams.get('id');
 
             if (!orderId) {
-                setError("Buyurtma ID si ko'rsatilmagan");
+                setError("ID заказа не указан");
                 setLoading(false);
                 return;
             }
@@ -39,10 +39,10 @@ const OrderById = () => {
                     
                     setOrderData({...data, ingredients: combinedIngredients});
                 } else {
-                    setError('Ma\'lumot topilmadi');
+                    setError('Данные не найдены');
                 }
             } catch (err) {
-                setError('Ma\'lumot yuklashda xatolik yuz berdi');
+                setError('Произошла ошибка при загрузке данных');
             } finally {
                 setLoading(false);
             }
@@ -53,7 +53,7 @@ const OrderById = () => {
 
     const copyOrderId = () => {
         navigator.clipboard.writeText(orderData.orderId.toString());
-        toast.success('Buyurtma ID nusxalandi!');
+        toast.success('ID заказа скопирован!');
     };
 
     if (loading) return <div className="flex justify-center items-center h-screen bg-white"><div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-[#EEA734]"></div></div>;
@@ -65,7 +65,7 @@ const OrderById = () => {
             <NavbarTop />
             <section className="mt-8 bg-[#FFFFFF] rounded-lg shadow-lg p-6">
                 <div className="flex items-center justify-between mb-4">
-                    <h1 className="text-3xl font-bold text-[#000000]">Buyurtma</h1>
+                    <h1 className="text-3xl font-bold text-[#000000]">Заказ</h1>
                     <button 
                         onClick={copyOrderId}
                         className="flex items-center bg-[#EEA734] text-white px-4 py-2 rounded-md hover:bg-opacity-80 transition duration-300"
@@ -73,7 +73,7 @@ const OrderById = () => {
                         #{orderData.orderId} <FaClipboard className="ml-2" />
                     </button>
                 </div>
-                <h2 className="text-2xl font-semibold mb-4 text-[#000000]">Maxsulotlar:</h2>
+                <h2 className="text-2xl font-semibold mb-4 text-[#000000]">Продукты:</h2>
                 {orderData.ingredients && orderData.ingredients.length > 0 ? (
                     <ul className="space-y-4">
                         {orderData.ingredients.map((ingredient, index) => (
@@ -86,7 +86,7 @@ const OrderById = () => {
                         ))}
                     </ul>
                 ) : (
-                    <p className="text-[#000000]">Ingredientlar mavjud emas</p>
+                    <p className="text-[#000000]">Ингредиенты отсутствуют</p>
                 )}
             </section>
         </main>

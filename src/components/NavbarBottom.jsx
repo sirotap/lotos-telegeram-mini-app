@@ -14,14 +14,14 @@ const NavbarBottom = () => {
                 className={`w-1/2 text-center text-sm font-semibold border p-2 flex flex-col items-center ${isActive('/dashboard') ? 'text-primary-50' : 'text-gray-400'}`}
             >
                 <CiForkAndKnife className="text-2xl" />
-                <h2 className="mt-1 font-normal">Home</h2>
+                <h2 className="mt-1 font-normal">Главная</h2>
             </div>
             <div 
                 onClick={() => navigate('orders')} 
                 className={`w-1/2 text-center text-sm font-semibold border p-2 flex flex-col items-center ${isActive('/dashboard/orders') ? 'text-primary-50' : 'text-gray-400'}`}
             >
                 <CiSquareChevDown className="text-2xl" />
-                <h2 className="mt-1 font-normal">Orders</h2>
+                <h2 className="mt-1 font-normal">Заказы</h2>
             </div>
         </footer>
     );

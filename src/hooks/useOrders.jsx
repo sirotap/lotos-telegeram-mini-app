@@ -41,11 +41,11 @@ const useOrders = () => {
 
         try {
             await ApiService.sendOrder(orderData);
-            toast.success("Buyurtma muvaffaqiyatli yuborildi!");
+            toast.success("Заказ успешно отправлен!");
             setOrders({});
             return true;
         } catch (error) {
-            toast.error("Buyurtma yuborishda xatolik yuz berdi.");
+            toast.error("Произошла ошибка при отправке заказа.");
             return false;
         }
     };
