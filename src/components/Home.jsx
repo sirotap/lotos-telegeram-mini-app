@@ -47,7 +47,7 @@ const Home = () => {
 
     if (isLoading) return <div>Loading...</div>;
     if (error) return <div>Error: {error}</div>;
-
+console.log(menuItems)
     return (
         <div className="bg-white min-h-[70svh] h-full">
             <SearchBar searchTerm={searchTerm} onSearch={handleSearch} />
@@ -128,7 +128,7 @@ const Home = () => {
                                 <CiShoppingBasket className='text-2xl mr-2' />
                                 <span>Подтвердить</span>
                             </div>
-                            <span className="font-bold">{calculateTotalPrice(menuItems).toLocaleString()} so&apos;m</span>
+                            <span className="font-bold">{calculateTotalPrice(menuItems).toLocaleString()} сум</span>
                         </button>
                     </>
                 ) : (

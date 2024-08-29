@@ -50,9 +50,9 @@ const Card = ({ item, onAddClick, onIncrement, onDecrement, quantity }) => {
         <div className="rounded-2xl w-full max-w-[350px] mx-auto bg-slate-50 flex flex-col pb-4 border">
 
             <div className="relative flex-none sm:w-60 md:h-42 h-40 sm:h-auto">
-                <div className="absolute inset-0 bg-cover bg-center filter blur-sm before:absolute before:inset-0 before:bg-cover before:bg-center before:content-[''] before:filter before:blur-sm before:rounded-md before:z-[-1]" style={{ backgroundImage: `url(${`http://localhost:5000/api/Files?id=${item.image}`})` }}></div>
+                <div className="absolute inset-0 bg-cover bg-center filter blur-sm before:absolute before:inset-0 before:bg-cover before:bg-center before:content-[''] before:filter before:blur-sm before:rounded-md before:z-[-1]" style={{ backgroundImage: `url(${`https://lotosapi.algorithmic.uz/api/Files?id=${item.image}`})` }}></div>
                 <img 
-                    src={`http://localhost:5000/api/Files?id=${item.image}`} 
+                    src={`https://lotosapi.algorithmic.uz/api/Files?id=${item.image}`} 
                     alt={item.name} 
                     className='absolute inset-0 w-full h-full object-cover rounded-md mx-auto' 
                     loading="lazy" 

@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import { ApiService } from '../api/api';
 import toast from 'react-hot-toast';
+import { useSearchParams } from 'react-router-dom';
 
 const useOrders = () => {
     const [orders, setOrders] = useState({});
+    const [searchParams] = useSearchParams();
 
     const addToOrder = (itemId) => {
         setOrders(prev => ({ ...prev, [itemId]: (prev[itemId] || 0) + 1 }));
@@ -30,8 +32,9 @@ const useOrders = () => {
     };
 
     const confirmOrder = async (comment) => {
+        const Id = searchParams.get('id');
         const orderData = {
-            orderId: Math.floor(10000 + Math.random() * 90000), // 5-digit random number
+            orderId: Id, // 5-digit random number
             storeItems: Object.entries(orders).map(([menuItemId, quantity]) => ({
                 menuItemId: parseInt(menuItemId),
                 quantity
