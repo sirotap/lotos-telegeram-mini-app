@@ -30,11 +30,11 @@ Lotos Telegram Mini App - bu foydalanuvchilarga Telegram orqali ovqat buyurtma b
 ## O'rnatish
 1. Repozitoriyni klonlash:
    ```bash
-   git clone https://github.com/ZiyovuddinTolipov/lotos-telegeram-mini-appp.git
+   git clone https://github.com/ZiyovuddinTolipov/lotos-telegeram-mini-app.git
    ```
 2. Loyiha papkasiga o'tish:
    ```bash
-   cd lotos-telegeram-mini-appp
+   cd lotos-telegeram-mini-app
    ```
 3. Kerakli paketlarni o'rnatish:
    ```bash
