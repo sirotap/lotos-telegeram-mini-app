@@ -17,7 +17,7 @@ const CardOrder = ({ item, quantity, onUpdateOrder }) => {
                 >
                     -
                 </button>
-                <span className="px-4 py-1 bg-gray-100 dark:bg-gray-600 dark:text-black">{quantity}</span>
+                <span className="px-4 py-1 bg-gray-100 dark:bg-gray-600 dark:text-white">{quantity}</span>
                 <button
                     onClick={() => onUpdateOrder(item.id, quantity + 1)}
                     className="px-2 py-1 bg-gray-200 dark:bg-gray-700 dark:text-white rounded-r"
