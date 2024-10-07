@@ -92,7 +92,7 @@ const Card = ({ item, onAddClick, onIncrement, onDecrement, quantity, onUpdateQu
                             onChange={handleInputChange}
                             onBlur={handleInputBlur}
                             placeholder="Yozing"
-                            className="w-16 text-center py-2 text-xl bg-transparent dark:text-white"
+                            className="w-16 text-center py-2 text-xl bg-transparent dark:text-black"
                         />
                         <button
                             onClick={handleIncrement}
